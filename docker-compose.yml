@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  migration-tool:
+    build: .
+    container_name: repository-migration-tool
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - SOURCE_OWNER=${SOURCE_OWNER}
+      - SOURCE_REPO=${SOURCE_REPO}
+      - TARGET_OWNER=${TARGET_OWNER}
+      - TARGET_REPO=${TARGET_REPO}
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
